@@ -1,3 +1,14 @@
+const rockBtn = document.getElementById("rock");
+const paperBtn = document.getElementById("paper");
+const scissorsBtn = document.getElementById("scissors");
+const resultsDiv = document.querySelector(".results");
+const playerScoreDiv = document.querySelector(".player-score");
+const computerScoreDiv = document.querySelector(".computer-score");
+const playAgainBtn = document.querySelector(".play-again");
+
+let humanScore = 0;
+let computerScore = 0;
+
 const getComputerChoice = () => {
     const choice = Math.floor(Math.random() * 3);
     switch (choice){
@@ -10,57 +21,73 @@ const getComputerChoice = () => {
     }
 }
 
-const getHumanChoice = () => {
-    const choice = prompt("Rock, Paper or Scissors?");
-    return choice;
+const updateScore = () => {
+    playerScoreDiv.textContent = `Player Score: ${humanScore}`;
+    computerScoreDiv.textContent = `Computer Score: ${computerScore}`;
+    if (humanScore === 5){
+        resultsDiv.textContent = "Player Wins!";
+        playAgainBtn.classList.toggle("hide");
+        rockBtn.disabled = true;
+        paperBtn.disabled = true;
+        scissorsBtn.disabled = true;
+    } else if (computerScore === 5){
+        resultsDiv.textContent = "Computer Wins!"
+        playAgainBtn.classList.toggle("hide");
+        rockBtn.disabled = true;
+        paperBtn.disabled = true;
+        scissorsBtn.disabled = true;
+    }
 }
-
 
 const playRound = (humanChoice, computerChoice) => {
-    humanChoice = humanChoice.toLowerCase();
     if (humanChoice === computerChoice){
-        console.log("You tied!");
+        resultsDiv.textContent = "You tied!";
+        updateScore();
     }
     else if (humanChoice === "rock" && computerChoice === "paper"){
-        console.log("You lose! Paper beats Rock");
+        resultsDiv.textContent = "You lose! Paper beats Rock";
         computerScore++;
+        updateScore();
     }
     else if (humanChoice === "rock" && computerChoice === "scissors"){
-        console.log("You win! Rock beats Scissors");
+        resultsDiv.textContent = "You win! Rock beats Scissors";
         humanScore++;
+        updateScore();
     }
     else if (humanChoice === "paper" && computerChoice === "scissors"){
-        console.log("You lose! Scissors beats Paper");
+        resultsDiv.textContent = "You lose! Scissors beats Paper";
         computerScore++;
+        updateScore();
     }
     else if (humanChoice === "paper" && computerChoice === "rock"){
-        console.log("You win! Paper beats Rock");
+        resultsDiv.textContent = "You win! Paper beats Rock";
         humanScore++;
+        updateScore();
     }
     else if (humanChoice === "scissors" && computerChoice === "rock"){
-        console.log("You lose! Rock beats scissors");
+        resultsDiv.textContent = "You lose! Rock beats scissors";
         computerScore++;
+        updateScore();
     }
     else{
-        console.log("You win! Scissors beats Paper");
+        resultsDiv.textContent = "You win! Scissors beats Paper";
         humanScore++;
+        updateScore();
     }
 }
 
-let humanScore = 0;
-let computerScore = 0;
-const playGame = () => {
-    for (let i = 0; i <= 4; i++){
-        playRound(getHumanChoice(), getComputerChoice());
-    }
-    if(humanScore > computerScore){
-        console.log(`You Won! With a score of ${humanScore} against ${computerScore}`)
-    }
-    else if (computerScore > humanScore){
-        console.log(`You lost! With a score of ${humanScore} against ${computerScore}`)
-    }
-    else{
-        console.log(`It was a tie with both getting a score of ${humanScore}`)
-    }
+const reset = () => {
+    computerScore = 0;
+    humanScore = 0;
+    playAgainBtn.classList.toggle("hide");
+    updateScore();
+    resultsDiv.textContent = "";
+    rockBtn.disabled = false;
+    paperBtn.disabled = false;
+    scissorsBtn.disabled = false;
 }
-playGame()
+
+rockBtn.addEventListener("click", () => playRound("rock", getComputerChoice()));
+paperBtn.addEventListener("click", () => playRound("paper", getComputerChoice()));
+scissorsBtn.addEventListener("click", () => playRound("scissors", getComputerChoice()));
+playAgainBtn.addEventListener("click", () => reset());

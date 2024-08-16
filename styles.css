@@ -1,0 +1,81 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
+
+/* *{
+    outline: 1px solid red;
+} */
+
+body{
+    background-color: rgb(26, 26, 56);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+
+button{
+    background-color: transparent;
+    border-radius: 0;
+    appearance: none;
+    color: white;
+    font-family: Roboto;
+    font-size: 15px;
+    border: 1px solid white;
+    border-radius: 10px;
+    padding: 10px 25px;
+}
+
+button:hover{
+    background-color: rgb(26, 26, 100);
+}
+
+button:active{
+    background-color: rgb(26, 26, 150);
+}
+
+button:disabled{
+    display: none;
+}
+
+.container{
+    display: flex;
+    gap: 50px;
+    padding: 25px;
+    margin: 100px;
+}
+
+.results-container{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    background-color: transparent;
+    padding: 50px;
+    margin-top: 100px;
+    color: white;
+    font-size: 24px;
+    font-family: Roboto;
+    font-weight: 900;
+    height: 90px;
+}
+
+.results{
+    height: 24px;
+}
+
+.score-container{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 25px;
+    margin-bottom: 50px;
+}
+
+.play-again{
+    margin-top: 50px;
+    height: 40px;
+}
+
+.hide{
+    display: none;
+    height: 40px;
+}
